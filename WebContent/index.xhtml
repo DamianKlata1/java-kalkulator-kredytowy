@@ -3,28 +3,43 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title>Kalkulator kredytowy v01</title>
 </h:head>
 <h:body>
 
-	<h1>Kalkulator kredytowy</h1>
+	<p:panel header="Kalkulator kredytowy" margin="1em auto">
 
-	<h:form id="bla">
-  		ilość: <h:inputText value="#{creditCalcBB.amount}" />
-		<br />
-  		procent: <h:inputText value="#{creditCalcBB.interest}" />
-		<br />
-		ile lat: <h:inputText value="#{creditCalcBB.years}" />
-		<br />
-		<h:messages id="msg" />
-
-		<h:commandButton value="Oblicz miesięczną rate" action="#{creditCalcBB.calc()}"/>
+		<h:form id="bla">
+			<h:panelGrid id="grid" columns="3" cellpadding="5">
+				<p:outputLabel for="amount" value="kwota:"/>
+		  		<p:inputText id="amount" value="#{creditCalcBB.amount}" required="true" requiredMessage="Nie podano kwoty" />
+				<p:message for="amount" />
+				
+				<p:outputLabel for="interest" value="procent:"/>
+		  		<p:inputText id="interest" value="#{creditCalcBB.interest}" required="true" requiredMessage="Nie podano oprocentowania"/>
+				<p:message for="interest" />
+				
+				<p:outputLabel for="years" value="ile lat:"/>
+				<p:inputText id="years" value="#{creditCalcBB.years}" required="true" requiredMessage="Nie podano ile lat"/>
+				<p:message for="years" />
+				
+				
 		
-		<br />
-		<h:commandLink value="Informacje" action="#{creditCalcBB.info()}" />
-	</h:form>
+				<p:commandButton value="Oblicz miesięczną rate" action="#{creditCalcBB.calc()}" update="@form"/>
+				<p:commandButton value="Oblicz miesięczną rate(AJAX)" action="#{creditCalcBB.calc_AJAX()}" update="msg"/>
+				
+			</h:panelGrid>
+			
+			<p:messages id="msg"/>
+			
+			<h:commandLink value="Informacje" action="#{creditCalcBB.info()}" />
+			
+		</h:form>
+	</p:panel>
+	
 
 </h:body>
 </html>
