@@ -15,15 +15,26 @@
 		<h:form id="bla">
 			<h:panelGrid id="grid" columns="3" cellpadding="5">
 				<p:outputLabel for="amount" value="kwota:"/>
-		  		<p:inputText id="amount" value="#{creditCalcBB.amount}" required="true" requiredMessage="Nie podano kwoty" />
+		  		<p:inputText id="amount" value="#{creditCalcBB.amount}" required="true" requiredMessage="Nie podano kwoty" 
+		  			converterMessage="kwota musi być liczbą" validatorMessage="Minimalna kwota wynosi 100zł">
+		  			<f:validateDoubleRange minimum="100"/>
+		  		</p:inputText>	
 				<p:message for="amount" />
 				
 				<p:outputLabel for="interest" value="procent:"/>
-		  		<p:inputText id="interest" value="#{creditCalcBB.interest}" required="true" requiredMessage="Nie podano oprocentowania"/>
+		  		<p:inputText id="interest" value="#{creditCalcBB.interest}" required="true" 
+		  			requiredMessage="Nie podano oprocentowania" converterMessage="oprocentowanie musi być liczbą"
+		  			validatorMessage="oprocentowanie powinno mieścić się pomiędzy 1 a 50 procent">
+		  			<f:validateDoubleRange minimum="1" maximum="50"/>
+		  		</p:inputText>
 				<p:message for="interest" />
 				
 				<p:outputLabel for="years" value="ile lat:"/>
-				<p:inputText id="years" value="#{creditCalcBB.years}" required="true" requiredMessage="Nie podano ile lat"/>
+				<p:inputText id="years" value="#{creditCalcBB.years}" required="true" requiredMessage="Nie podano ile lat"
+					converterMessage="długość kredytu musi być liczbą całkowitą" 
+					validatorMessage="Minimalna długość kredytu wynosi 1 rok">
+					<f:validateDoubleRange minimum="1"/>
+				</p:inputText>
 				<p:message for="years" />
 				
 				

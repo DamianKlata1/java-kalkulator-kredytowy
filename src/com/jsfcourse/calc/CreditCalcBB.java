@@ -14,9 +14,9 @@ import javax.faces.context.FacesContext;
 @RequestScoped
 //@SessionScoped
 public class CreditCalcBB {
-	private String amount;
-	private String years;
-	private String interest;
+	private Double amount;
+	private Integer years;
+	private Double interest;
 	
 	private String result;
 	
@@ -28,27 +28,27 @@ public class CreditCalcBB {
 	
 	
 	
-	public String getAmount() {
+	public Double getAmount() {
 		return amount;
 	}
 
-	public void setAmount(String amount) {
+	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
 
-	public String getYears() {
+	public Integer getYears() {
 		return years;
 	}
 
-	public void setYears(String years) {
+	public void setYears(Integer years) {
 		this.years = years;
 	}
 
-	public String getInterest() {
+	public Double getInterest() {
 		return interest;
 	}
 
-	public void setInterest(String interest) {
+	public void setInterest(Double interest) {
 		this.interest = interest;
 	}
 
@@ -62,9 +62,6 @@ public class CreditCalcBB {
 
 	public boolean doTheMath() {
 		try {
-			double amount = Double.parseDouble(this.amount);
-			double years = Double.parseDouble(this.years);
-			double interest = Double.parseDouble(this.interest);
 			
 			double amountOfMonths = years* 12;
 
@@ -92,7 +89,7 @@ public class CreditCalcBB {
 	// Put result in messages on AJAX call
 	public String calc_AJAX() {
 		if (doTheMath()) {
-			ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Wynik: " + result, null));
+			ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Miesięczna rata: " + result + " zł", null));
 		}
 		return null;
 	}
